@@ -1,0 +1,9 @@
+{
+	"name": "tokyo-olympic-df10",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2499d77b-6e7f-41dd-a58f-ddecca2e726d",
+		"tenantId": "1677db58-aa27-4104-af65-085a44313748"
+	}
+}
