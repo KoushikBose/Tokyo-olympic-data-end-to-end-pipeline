@@ -165,7 +165,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "ls_tokyo_olympic_github",
+					"referenceName": "CoachesHttp",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -182,7 +182,7 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_tokyo_olympic_github')]"
+				"[concat(variables('factoryId'), '/linkedServices/CoachesHttp')]"
 			]
 		},
 		{
