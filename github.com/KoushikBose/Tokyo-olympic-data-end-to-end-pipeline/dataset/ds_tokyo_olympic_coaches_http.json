@@ -1,0 +1,21 @@
+{
+	"name": "ds_tokyo_olympic_coaches_http",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_tokyo_olympic_github",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
