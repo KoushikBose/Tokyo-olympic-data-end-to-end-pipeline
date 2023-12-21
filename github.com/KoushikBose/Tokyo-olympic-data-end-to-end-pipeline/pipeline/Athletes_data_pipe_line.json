@@ -60,7 +60,14 @@
 			{
 				"name": "Coaches",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Athelets",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.0:10:00",
 					"retry": 0,
@@ -101,7 +108,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_tokyo_olympic_coaches_http",
+						"referenceName": "ds_tokyo_olypmic_data_github",
 						"type": "DatasetReference"
 					}
 				],
