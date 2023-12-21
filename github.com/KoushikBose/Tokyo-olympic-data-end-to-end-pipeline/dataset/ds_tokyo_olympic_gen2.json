@@ -1,0 +1,21 @@
+{
+	"name": "ds_tokyo_olympic_gen2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_tokyo_olympic_datalakegen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "olympic.csv",
+				"folderPath": "raw-data",
+				"fileSystem": "tokyo-olympic-data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
