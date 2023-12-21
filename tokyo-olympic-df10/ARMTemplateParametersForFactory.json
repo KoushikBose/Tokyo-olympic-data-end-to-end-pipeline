@@ -8,6 +8,9 @@
 		"ls_tokyo_olympic_datalakegen2_accountKey": {
 			"value": ""
 		},
+		"CoachesHttp_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Coaches.csv"
+		},
 		"ls_tokyo_olympic_datalakegen2_properties_typeProperties_url": {
 			"value": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
