@@ -2,7 +2,7 @@
 	"name": "ds_tokyo_olympic_coaches_http",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_tokyo_olympic_github",
+			"referenceName": "CoachesHttp",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
