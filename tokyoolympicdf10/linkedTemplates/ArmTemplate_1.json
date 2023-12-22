@@ -40,6 +40,55 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_gender_gen2_new')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_gender_gen2_sql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "part-00000-tid-6047298369756411006-fb1469b8-7715-470b-8345-8dfcb6b74954-61-1-c000.snappy.parquet",
+						"folderPath": "transformed-data/gender",
+						"fileSystem": "tokyo-olympic-data"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "Discipline",
+						"type": "UTF8"
+					},
+					{
+						"name": "Female",
+						"type": "INT32"
+					},
+					{
+						"name": "Male",
+						"type": "INT32"
+					},
+					{
+						"name": "Total",
+						"type": "INT32"
+					},
+					{
+						"name": "Avg_female",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "Avg_Male",
+						"type": "DOUBLE"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_gender_http')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -309,6 +358,67 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Gender sql data",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Coache sql data",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.00:10:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "ParquetReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_gender_gen2_new",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_Gender_gen2_sql",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -317,7 +427,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ls_athelets_gen2_sql')]"
+				"[concat(variables('factoryId'), '/datasets/ls_athelets_gen2_sql')]",
+				"[concat(variables('factoryId'), '/datasets/ds_gender_gen2_new')]"
 			]
 		},
 		{
