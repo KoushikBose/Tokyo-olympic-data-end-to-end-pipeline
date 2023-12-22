@@ -1,0 +1,12 @@
+{
+	"name": "ls_gender_gen2_sql",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://tokyoolympicgen2.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDgzQjdCRDMzLTI0NjgtNDQ1Ny1BOEI1LUMyRkE3NTIxNEY5QV9jODNhZjRkYi1hYTU0LTRiN2UtYTU3NS1jZTI4Zjg3YWJhY2QiDQp9"
+		}
+	}
+}
