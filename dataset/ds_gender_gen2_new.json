@@ -1,0 +1,46 @@
+{
+	"name": "ds_gender_gen2_new",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_gender_gen2_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-00000-tid-6047298369756411006-fb1469b8-7715-470b-8345-8dfcb6b74954-61-1-c000.snappy.parquet",
+				"folderPath": "transformed-data/gender",
+				"fileSystem": "tokyo-olympic-data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Discipline",
+				"type": "UTF8"
+			},
+			{
+				"name": "Female",
+				"type": "INT32"
+			},
+			{
+				"name": "Male",
+				"type": "INT32"
+			},
+			{
+				"name": "Total",
+				"type": "INT32"
+			},
+			{
+				"name": "Avg_female",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "Avg_Male",
+				"type": "DOUBLE"
+			}
+		]
+	}
+}
