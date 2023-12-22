@@ -13,6 +13,30 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_coaches_http')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_coaches_http",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_coaches_sql_gen2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -894,6 +918,7 @@
 				"lastPublishTime": "2023-12-22T06:38:54Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_coaches_http')]",
 				"[concat(variables('factoryId'), '/datasets/ds_gender_http')]",
 				"[concat(variables('factoryId'), '/datasets/ds_gender_gen2')]",
 				"[concat(variables('factoryId'), '/datasets/ds_medal_http')]",

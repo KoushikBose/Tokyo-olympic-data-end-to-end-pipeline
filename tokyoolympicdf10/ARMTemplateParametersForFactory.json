@@ -29,6 +29,9 @@
 		"ls_Adlsgen2_linked_service_sql_accountKey": {
 			"value": ""
 		},
+		"ls_adlsgen2_linkedservice_data_accountKey": {
+			"value": ""
+		},
 		"ls_athelets_http_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Athletes.csv"
 		},
@@ -57,6 +60,9 @@
 			"value": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
 		"ls_Adlsgen2_linked_service_sql_properties_typeProperties_url": {
+			"value": "https://tokyoolympicgen2.dfs.core.windows.net/"
+		},
+		"ls_adlsgen2_linkedservice_data_properties_typeProperties_url": {
 			"value": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		}
 	}
