@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "part-00000-tid-3983350962959424185-98d532de-7f8f-471b-8f0a-d88030b5a9ac-62-1-c000.snappy.parquet",
-				"folderPath": "transformed-data/athelets",
+				"fileName": "Athelets.csv",
+				"folderPath": "raw-data",
 				"fileSystem": "tokyo-olympic-data"
 			},
 			"columnDelimiter": ",",
