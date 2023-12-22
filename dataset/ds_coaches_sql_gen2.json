@@ -2,7 +2,7 @@
 	"name": "ds_coaches_sql_gen2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_athelets_sql",
+			"referenceName": "ls_coache_sql",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
