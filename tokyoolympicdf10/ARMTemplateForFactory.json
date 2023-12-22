@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "tokyoolympicdf10"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"ls_athelets_sql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_athelets_sql'"
@@ -22,6 +26,10 @@
 		"ls_coache_sql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_coache_sql'"
+		},
+		"ls_gender_gen2_sql_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_gender_gen2_sql'"
 		},
 		"ls_tokyo_olympic_data_gen2_accountKey": {
 			"type": "secureString",
@@ -42,6 +50,10 @@
 		"ls_coaches_http_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Coaches.csv"
+		},
+		"ls_gender_gen2_sql_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
 		"ls_gender_http_properties_typeProperties_url": {
 			"type": "string",
@@ -123,6 +135,67 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Coache sql data",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Athelet_sql_data",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.00:10:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "ParquetReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_coache_gen2_sql",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_coaches_sql_gen2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"policy": {
@@ -132,7 +205,9 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ls_athelets_gen2_sql')]",
-				"[concat(variables('factoryId'), '/datasets/ds_athelets_gen2_sql')]"
+				"[concat(variables('factoryId'), '/datasets/ds_athelets_gen2_sql')]",
+				"[concat(variables('factoryId'), '/datasets/ds_coache_gen2_sql')]",
+				"[concat(variables('factoryId'), '/datasets/ds_coaches_sql_gen2')]"
 			]
 		},
 		{
@@ -482,6 +557,27 @@
 				"[concat(variables('factoryId'), '/datasets/ds_medal_gen2')]",
 				"[concat(variables('factoryId'), '/datasets/ds_team_http')]",
 				"[concat(variables('factoryId'), '/datasets/ds_team_gen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_Gender_gen2_sql')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Gender"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		},
 		{
@@ -901,6 +997,19 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_athelets_http')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -986,6 +1095,23 @@
 					"url": "[parameters('ls_coaches_http_properties_typeProperties_url')]",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_gender_gen2_sql')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_gender_gen2_sql_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('ls_gender_gen2_sql_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []

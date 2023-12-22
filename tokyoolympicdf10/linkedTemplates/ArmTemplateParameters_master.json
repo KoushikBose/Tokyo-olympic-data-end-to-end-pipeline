@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "tokyoolympicdf10"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
 		"ls_athelets_sql_connectionString": {
 			"value": ""
 		},
@@ -15,6 +18,9 @@
 			"value": ""
 		},
 		"ls_coache_sql_connectionString": {
+			"value": ""
+		},
+		"ls_gender_gen2_sql_accountKey": {
 			"value": ""
 		},
 		"ls_tokyo_olympic_data_gen2_accountKey": {
@@ -31,6 +37,9 @@
 		},
 		"ls_coaches_http_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Coaches.csv"
+		},
+		"ls_gender_gen2_sql_properties_typeProperties_url": {
+			"value": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
 		"ls_gender_http_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/EntriesGender.csv"

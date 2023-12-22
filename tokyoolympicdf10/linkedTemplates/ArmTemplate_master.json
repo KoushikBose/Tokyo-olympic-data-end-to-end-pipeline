@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "tokyoolympicdf10"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"ls_athelets_sql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_athelets_sql'"
@@ -22,6 +26,10 @@
 		"ls_coache_sql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_coache_sql'"
+		},
+		"ls_gender_gen2_sql_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_gender_gen2_sql'"
 		},
 		"ls_tokyo_olympic_data_gen2_accountKey": {
 			"type": "secureString",
@@ -42,6 +50,10 @@
 		"ls_coaches_http_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Coaches.csv"
+		},
+		"ls_gender_gen2_sql_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
 		"ls_gender_http_properties_typeProperties_url": {
 			"type": "string",
@@ -86,6 +98,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
 					"ls_athelets_sql_connectionString": {
 						"value": "[parameters('ls_athelets_sql_connectionString')]"
 					},
@@ -97,6 +112,9 @@
 					},
 					"ls_coache_sql_connectionString": {
 						"value": "[parameters('ls_coache_sql_connectionString')]"
+					},
+					"ls_gender_gen2_sql_accountKey": {
+						"value": "[parameters('ls_gender_gen2_sql_accountKey')]"
 					},
 					"ls_tokyo_olympic_data_gen2_accountKey": {
 						"value": "[parameters('ls_tokyo_olympic_data_gen2_accountKey')]"
@@ -112,6 +130,9 @@
 					},
 					"ls_coaches_http_properties_typeProperties_url": {
 						"value": "[parameters('ls_coaches_http_properties_typeProperties_url')]"
+					},
+					"ls_gender_gen2_sql_properties_typeProperties_url": {
+						"value": "[parameters('ls_gender_gen2_sql_properties_typeProperties_url')]"
 					},
 					"ls_gender_http_properties_typeProperties_url": {
 						"value": "[parameters('ls_gender_http_properties_typeProperties_url')]"
