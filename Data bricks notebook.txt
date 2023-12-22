@@ -1,0 +1,64 @@
+configs = {"fs.azure.account.auth.type": "OAuth",
+"fs.azure.account.oauth.provider.type": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+"fs.azure.account.oauth2.client.id": "75064d4a-a4d9-4d99-8484-eb4f09685bae",
+"fs.azure.account.oauth2.client.secret": "fbB8Q~Ow1tmn_TLne-lU2yjPD1KxsVFX2yJgRcCH",
+"fs.azure.account.oauth2.client.endpoint": "https://login.microsoftonline.com/1677db58-aa27-4104-af65-085a44313748/oauth2/token"}
+
+dbutils.fs.mount(
+source = "abfss://tokyo-olympic-data@tokyoolympicgen2.dfs.core.windows.net", 
+mount_point = "/mnt/tokyoolymic",
+extra_configs = configs)
+  
+%fs
+ls "/mnt/tokyoolymic"
+
+athelets= spark.read.format("csv").option("header",True).load("/mnt/tokyoolymic/raw-data/Athelets.csv")
+coaches= spark.read.format("csv").option("header",True).load("/mnt/tokyoolymic/raw-data/coaches.csv") 
+gender=spark.read.format("csv").option("header",True).schema(gender_schema).load("/mnt/tokyoolymic/raw-data/Gender.csv") 
+medal=spark.read.format("csv").option("header",True).schema(medal_schema).load("/mnt/tokyoolymic/raw-data/medal.csv")
+team=spark.read.format("csv").option("header",True).schema(team_schema).load("/mnt/tokyoolymic/raw-data/team.csv")    
+
+athelets.show()      
+
+athelets.printSchema()
+
+coaches.show()
+
+coaches_event_data = coaches.fillna(value="Male",subset=["Event"])
+
+coaches_event_data.show()
+coaches.printSchema()
+gender.show()
+gender.printSchema()
+
+gender_schema="Discipline string,Female int, Male int, Total int"
+
+medal.show()
+
+medal.printSchema()
+
+medal_schema = "Rank int,Team_Country string,Gold int,Silver int,Bronze int,Total int,RankbyTotal int"
+medal.printSchema()
+team.show()
+team.printSchema()
+
+team_schema="Rank int,Team_Country string,Gold int,Silver int,Bronze int,Total int,RankbyTotal int"
+
+# Find the top country with highest number of gold medals
+
+top_gold_medal_country=medal.orderBy("gold",ascending=False).select("Team_Country","Gold")
+
+top_gold_medal_country.show()
+#calculate the average number of entries by each descipline
+average_entries_by_gender = gender.withColumn('Avg_female',gender["Female"]/gender["Total"]).withColumn("Avg_Male",gender["Male"]/gender["Total"])
+average_entries_by_gender.show()
+
+
+athelets.write.mode("overwrite").option("header",True).parquet("/mnt/tokyoolymic/transformed-data/athelets")
+
+coaches_event_data.write.mode("overwrite").option("header",True).parquet("/mnt/tokyoolymic/transformed-data/coaches")
+
+top_gold_medal_country.write.mode("overwrite").option("header",True).parquet("/mnt/tokyoolymic/transformed-data/medal")
+
+team.write.mode("overwrite").option("header",True).parquet("/mnt/tokyoolymic/transformed-data/team")
+average_entries_by_gender.write.mode("overwrite").option("header",True).parquet("/mnt/tokyoolymic/transformed-data/gender")
