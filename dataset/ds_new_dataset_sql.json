@@ -1,0 +1,41 @@
+{
+	"name": "ds_new_dataset_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Discipline",
+				"type": "varchar"
+			},
+			{
+				"name": "Female",
+				"type": "varchar"
+			},
+			{
+				"name": "Male",
+				"type": "varchar"
+			},
+			{
+				"name": "Total",
+				"type": "varchar"
+			},
+			{
+				"name": "Avg_female",
+				"type": "varchar"
+			},
+			{
+				"name": "Avg_male",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Gender"
+		}
+	}
+}

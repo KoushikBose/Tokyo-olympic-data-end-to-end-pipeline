@@ -167,7 +167,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_gender_gen_sql",
+						"referenceName": "ds_Gender_gen2_sql",
 						"type": "DatasetReference"
 					}
 				]
