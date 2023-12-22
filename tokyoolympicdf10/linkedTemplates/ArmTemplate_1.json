@@ -13,6 +13,42 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_coaches_sql_gen2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_coache_sql",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Country",
+						"type": "varchar"
+					},
+					{
+						"name": "Discipline",
+						"type": "varchar"
+					},
+					{
+						"name": "Event",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Coache"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_gender_gen2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -516,6 +552,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ls_athelets_gen2_sql')]",
+				"[concat(variables('factoryId'), '/datasets/ds_coaches_sql_gen2')]",
 				"[concat(variables('factoryId'), '/datasets/ds_gender_gen2_new')]",
 				"[concat(variables('factoryId'), '/datasets/ds_new_dataset_sql')]"
 			]
