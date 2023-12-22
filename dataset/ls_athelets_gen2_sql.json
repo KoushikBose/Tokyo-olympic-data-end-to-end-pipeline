@@ -1,0 +1,21 @@
+{
+	"name": "ls_athelets_gen2_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_athelets_transformed_gen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-00000-tid-3983350962959424185-98d532de-7f8f-471b-8f0a-d88030b5a9ac-62-1-c000.snappy.parquet",
+				"folderPath": "transformed-data/athelets",
+				"fileSystem": "tokyo-olympic-data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
