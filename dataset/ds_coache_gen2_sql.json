@@ -1,0 +1,38 @@
+{
+	"name": "ds_coache_gen2_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_coache_gen2_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-00000-tid-8219468192188517193-b3bda6f5-33f6-4e9a-8e5d-3f9cd751a982-57-1-c000.snappy.parquet",
+				"folderPath": "transformed-data/coaches",
+				"fileSystem": "tokyo-olympic-data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Country",
+				"type": "UTF8"
+			},
+			{
+				"name": "Discipline",
+				"type": "UTF8"
+			},
+			{
+				"name": "Event",
+				"type": "UTF8"
+			}
+		]
+	}
+}
