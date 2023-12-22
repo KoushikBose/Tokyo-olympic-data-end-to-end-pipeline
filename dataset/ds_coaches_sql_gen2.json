@@ -1,0 +1,33 @@
+{
+	"name": "ds_coaches_sql_gen2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_athelets_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Country",
+				"type": "varchar"
+			},
+			{
+				"name": "Discipline",
+				"type": "varchar"
+			},
+			{
+				"name": "Event",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Coache"
+		}
+	}
+}
