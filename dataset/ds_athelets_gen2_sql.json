@@ -1,0 +1,29 @@
+{
+	"name": "ds_athelets_gen2_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_athelets_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PersonName",
+				"type": "varchar"
+			},
+			{
+				"name": "Country",
+				"type": "varchar"
+			},
+			{
+				"name": "Discipline",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Athelet"
+		}
+	}
+}
