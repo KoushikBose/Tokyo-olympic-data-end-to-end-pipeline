@@ -7,17 +7,25 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "tokyoolympicdf10"
 		},
-		"ls_tokyo_olympic_data_gen2_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'ls_tokyo_olympic_data_gen2'"
-		},
 		"ls_athelets_sql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_athelets_sql'"
 		},
+		"ls_athelets_transformed_gen2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_athelets_transformed_gen2'"
+		},
+		"ls_tokyo_olympic_data_gen2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_tokyo_olympic_data_gen2'"
+		},
 		"ls_athelets_http_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Athletes.csv"
+		},
+		"ls_athelets_transformed_gen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
 		"ls_coaches_http_properties_typeProperties_url": {
 			"type": "string",
@@ -669,6 +677,32 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ls_athelets_gen2_sql')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_athelets_transformed_gen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "part-00000-tid-3983350962959424185-98d532de-7f8f-471b-8f0a-d88030b5a9ac-62-1-c000.snappy.parquet",
+						"folderPath": "transformed-data/athelets",
+						"fileSystem": "tokyo-olympic-data"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_athelets_transformed_gen2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ls_athelets_http')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -679,6 +713,36 @@
 					"url": "[parameters('ls_athelets_http_properties_typeProperties_url')]",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_athelets_sql')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_athelets_sql_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_athelets_transformed_gen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_athelets_transformed_gen2_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('ls_athelets_transformed_gen2_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -756,19 +820,6 @@
 						"type": "SecureString",
 						"value": "[parameters('ls_tokyo_olympic_data_gen2_accountKey')]"
 					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ls_athelets_sql')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('ls_athelets_sql_connectionString')]"
 				}
 			},
 			"dependsOn": []
