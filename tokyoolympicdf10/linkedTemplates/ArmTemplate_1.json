@@ -458,7 +458,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_Gender_gen2_sql",
+								"referenceName": "ds_gender_gen_sql",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -472,7 +472,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ls_athelets_gen2_sql')]",
-				"[concat(variables('factoryId'), '/datasets/ds_gender_gen2_new')]"
+				"[concat(variables('factoryId'), '/datasets/ds_gender_gen2_new')]",
+				"[concat(variables('factoryId'), '/datasets/ds_gender_gen_sql')]"
 			]
 		},
 		{
