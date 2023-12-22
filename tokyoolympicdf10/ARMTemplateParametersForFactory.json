@@ -11,6 +11,12 @@
 		"ls_athelets_transformed_gen2_accountKey": {
 			"value": ""
 		},
+		"ls_coache_gen2_sql_accountKey": {
+			"value": ""
+		},
+		"ls_coache_sql_connectionString": {
+			"value": ""
+		},
 		"ls_tokyo_olympic_data_gen2_accountKey": {
 			"value": ""
 		},
@@ -18,6 +24,9 @@
 			"value": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Athletes.csv"
 		},
 		"ls_athelets_transformed_gen2_properties_typeProperties_url": {
+			"value": "https://tokyoolympicgen2.dfs.core.windows.net/"
+		},
+		"ls_coache_gen2_sql_properties_typeProperties_url": {
 			"value": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
 		"ls_coaches_http_properties_typeProperties_url": {

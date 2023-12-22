@@ -15,6 +15,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_athelets_transformed_gen2'"
 		},
+		"ls_coache_gen2_sql_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_coache_gen2_sql'"
+		},
+		"ls_coache_sql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_coache_sql'"
+		},
 		"ls_tokyo_olympic_data_gen2_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_tokyo_olympic_data_gen2'"
@@ -24,6 +32,10 @@
 			"defaultValue": "https://raw.githubusercontent.com/darshilparmar/tokyo-olympic-azure-data-engineering-project/main/data/Athletes.csv"
 		},
 		"ls_athelets_transformed_gen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://tokyoolympicgen2.dfs.core.windows.net/"
+		},
+		"ls_coache_gen2_sql_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://tokyoolympicgen2.dfs.core.windows.net/"
 		},
@@ -80,6 +92,12 @@
 					"ls_athelets_transformed_gen2_accountKey": {
 						"value": "[parameters('ls_athelets_transformed_gen2_accountKey')]"
 					},
+					"ls_coache_gen2_sql_accountKey": {
+						"value": "[parameters('ls_coache_gen2_sql_accountKey')]"
+					},
+					"ls_coache_sql_connectionString": {
+						"value": "[parameters('ls_coache_sql_connectionString')]"
+					},
 					"ls_tokyo_olympic_data_gen2_accountKey": {
 						"value": "[parameters('ls_tokyo_olympic_data_gen2_accountKey')]"
 					},
@@ -88,6 +106,9 @@
 					},
 					"ls_athelets_transformed_gen2_properties_typeProperties_url": {
 						"value": "[parameters('ls_athelets_transformed_gen2_properties_typeProperties_url')]"
+					},
+					"ls_coache_gen2_sql_properties_typeProperties_url": {
+						"value": "[parameters('ls_coache_gen2_sql_properties_typeProperties_url')]"
 					},
 					"ls_coaches_http_properties_typeProperties_url": {
 						"value": "[parameters('ls_coaches_http_properties_typeProperties_url')]"
