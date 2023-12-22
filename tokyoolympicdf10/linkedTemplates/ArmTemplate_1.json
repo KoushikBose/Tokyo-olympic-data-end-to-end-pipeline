@@ -208,6 +208,50 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_new_dataset_sql')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Discipline",
+						"type": "varchar"
+					},
+					{
+						"name": "Female",
+						"type": "varchar"
+					},
+					{
+						"name": "Male",
+						"type": "varchar"
+					},
+					{
+						"name": "Total",
+						"type": "varchar"
+					},
+					{
+						"name": "Avg_female",
+						"type": "varchar"
+					},
+					{
+						"name": "Avg_male",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Gender"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_team_gen2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -458,7 +502,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_gender_gen_sql",
+								"referenceName": "ds_new_dataset_sql",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -473,7 +517,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ls_athelets_gen2_sql')]",
 				"[concat(variables('factoryId'), '/datasets/ds_gender_gen2_new')]",
-				"[concat(variables('factoryId'), '/datasets/ds_gender_gen_sql')]"
+				"[concat(variables('factoryId'), '/datasets/ds_new_dataset_sql')]"
 			]
 		},
 		{
